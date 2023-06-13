@@ -29,7 +29,7 @@
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item active">
-          <a class="nav-link {% if request.path_info == '/mekanekle/' %}active{% endif %}" href="{% url 'mekanekle' %}">Mekan Başvuru</a>
+          {% comment %} <a class="nav-link {% if request.path_info == '/mekanekle/' %}active{% endif %}" href="{% url 'mekanekle' %}">Mekan Başvuru</a> {% endcomment %}
 
 
         </li>
@@ -40,26 +40,26 @@
             {{request.user.username}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'yer_listesi' %}">
+            {% comment %} <a class="dropdown-item" href="{% url 'yer_listesi' %}"> {% endcomment %}
                 <i class="fas fa-map-marker-alt"></i> Yer Listesi
             </a>
-            <a class="dropdown-item" href="{% url 'etkinlik_ekle' %}">
+            {% comment %} <a class="dropdown-item" href="{% url 'etkinlik_ekle' %}"> {% endcomment %}
                 <i class="fas fa-calendar-plus"></i> Etkinlik Ekle
             </a>
-            <a class="dropdown-item" href="{% url 'mekanlar' %}">
+            {% comment %} <a class="dropdown-item" href="{% url 'mekanlar' %}"> {% endcomment %}
               <i class="fa-solid fa-house-lock"></i> Mekanlar
           </a>
-          <a class="dropdown-item" href="{% url 'etkinliklerim' %}">
+          {% comment %} <a class="dropdown-item" href="{% url 'etkinliklerim' %}"> {% endcomment %}
             <i class="fa-solid fa-hat-wizard"></i> Etkinliklerim
         </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'my_profile' %}">
+            {% comment %} <a class="dropdown-item" href="{% url 'my_profile' %}"> {% endcomment %}
                 <i class="fas fa-user"></i> Profilim
             </a>
-            <a class="dropdown-item" href="{% url 'update_profile' %}">
+            {% comment %} <a class="dropdown-item" href="{% url 'update_profile' %}"> {% endcomment %}
                 <i class="fas fa-user-edit"></i> Profili Güncelle
             </a>
-            <a class="dropdown-item" href="{% url 'logout' %}">
+            {% comment %} <a class="dropdown-item" href="{% url 'logout' %}"> {% endcomment %}
                 <i class="fas fa-sign-out-alt"></i> Çıkış Yap
             </a>
         </div>
@@ -71,11 +71,11 @@
             Kullanıcı İşlemleri
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{%url 'login' %}"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a>
-            <a class="dropdown-item" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Kayıt Ol</a>
+            {% comment %} <a class="dropdown-item" href="{%url 'login' %}"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a>
+            <a class="dropdown-item" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Kayıt Ol</a> {% endcomment %}
         </li>
         {% endif %}
-        <form class="form-inline my-2 my-lg-0" method="POST" action="{%url 'arama_sonuclari' %}">
+        {% comment %} <form class="form-inline my-2 my-lg-0" method="POST" action="{%url 'arama_sonuclari' %}"> {% endcomment %}
           {% csrf_token %}
           <input class="form-control mr-sm-2" type="text" placeholder="Search" name="searched">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
