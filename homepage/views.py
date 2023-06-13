@@ -1,7 +1,12 @@
 import locale
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 import calendar
 from datetime import date, datetime,timedelta
+
+from django.urls import reverse
+
+from .forms import MekanForm
 def home(request, year=None, month=None):
     # Varsayılan olarak geçerli yıl ve ayı ata
     if year is None:
@@ -55,3 +60,28 @@ def create_calendar(year, month):#iki viewsda da aynısnı yapmamak için ayrı 
         "next_month": next_month.lower(),
         "next_year": next_year,
     }
+def mekanekle(request, year=None, month=None):
+    if year is None:
+        year = datetime.now().year
+    if month is None:
+        month = datetime.now().strftime('%B')
+    
+    submitted = False
+    
+    if request.method == "POST":
+        form = MekanForm(request.POST)
+        if form.is_valid():
+            mekan = form.save(commit=False)
+            if request.user.is_authenticated:
+                mekan.olusturan = request.user
+            mekan.save()
+            submitted = True
+            return HttpResponseRedirect(reverse('mekanekle') + '?submitted=True')
+    else:
+        form = MekanForm()
+    
+    if 'submitted' in request.GET:
+        submitted = True
+    
+    data = create_calendar(year, month)
+    return render(request, 'yer_ekle.html', {'form': form, **data, 'submitted': submitted})
