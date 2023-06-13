@@ -35,6 +35,8 @@ locale.setlocale(locale.LC_ALL, 'tr_TR.UTF-8')
 # Application definition
 
 INSTALLED_APPS = [
+    'ckeditor_uploader',
+    'ckeditor',
     'cities_light',
     'homepage',
     'django.contrib.admin',
