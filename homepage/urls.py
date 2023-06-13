@@ -11,4 +11,9 @@ urlpatterns = [
 path('', views.home, name='home'),
 path('<int:year>/<str:month>/', views.home, name='home'),
 path('mekan_ekle/', views.mekanekle, name='mekanekle'),
+path('get-ilceler/<int:sehir_id>/', views.get_ilceler, name='get_ilceler'),  
+path('update_profile', views.update_profile, name='update_profile'),
+path('register/', views.register, name='register'),
+path('login/', views.login_view, name='login'),
+path('my_profile/', views.my_profile, name='my_profile'),
 ]
