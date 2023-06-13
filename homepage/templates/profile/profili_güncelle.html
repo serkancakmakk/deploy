@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-8">col-8
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Güncelle</button>
+        </form>
+    </div>
+    {% if user.profile.profile_img %}
+    <div class="col-4">
+        <img src="{{ user.profile.profile_img.url }}" alt="User Image" style="width: 150px; height: 150px;" class="rounded-start">
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

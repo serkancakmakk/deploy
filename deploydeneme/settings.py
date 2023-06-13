@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,6 +34,9 @@ locale.setlocale(locale.LC_ALL, 'tr_TR.UTF-8')
 # Application definition
 
 INSTALLED_APPS = [
+    'ckeditor_uploader',
+    'ckeditor',
+    'cities_light',
     'homepage',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,13 +55,34 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'deploydeneme', 'static'),
+]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Format', 'Bold', 'Italic', 'Underline', 'Strike', 'BulletedList', 'NumberedList', 'Indent', 'Outdent'],
+            ['Link', 'Unlink', 'Table', 'Blockquote', 'CodeSnippet', 'TextColor', 'BGColor'],
+            ['Undo', 'Redo'],
+            ['Source'],
+        ],
+        'format_tags': 'p;h1;h2;h3;h4;h5;h6',
+        'removePlugins': 'image',
+        'extraAllowedContent': 'span;ul;li;table;td;style',
+    }
+}
 ROOT_URLCONF = 'deploydeneme.urls'
-
+BASE_DIR = Path(__file__).resolve().parent.parent
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'homepage','templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,3 +149,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_URL = '/login/'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# CİTİES LİGHT AYARLARI
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['tr']
+CITIES_LIGHT_INCLUDE_COUNTRIES = ['TR']
+CITIES_LIGHT_COUNTRY_CODES = ['TR']  # Sadece Türkiye verilerini indirir
+import locale
+
+locale.setlocale(locale.LC_ALL, 'tr_TR.UTF-8')
+
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['tr']  # Türkçe dilini ekleyin
+CITIES_LIGHT_TIMEZONES = ['UTC']
