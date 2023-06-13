@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import locale
 from django.shortcuts import render
 from django.http import HttpResponse
