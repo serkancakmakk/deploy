@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-sn5s(45tll-3#-9%k5g!!-+33-4riu^k*_h*1bmnv=g4+5%-ry
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['serkancakmak.pythonanywhere.com']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['serkancakmak.pythonanywhere.com']
+# ALLOWED_HOSTS = []
 import locale
 
 locale.setlocale(locale.LC_ALL, 'tr_TR.UTF-8')
