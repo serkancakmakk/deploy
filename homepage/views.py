@@ -11,8 +11,8 @@ import calendar
 from datetime import datetime
 from django.urls import reverse
 
-from homepage.models import Profile
-from .forms import MekanForm, ProfileUpdateForm
+from .models import Profile
+from .forms import MekanForm, ProfileUpdateForm, RegistrationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse
@@ -196,3 +196,24 @@ def update_profile(request, year=None, month=None):
         password_form = PasswordChangeForm(request.user)
 
     return render(request, 'profile/profili_güncelle.html', {'form': form, 'password_form': password_form, **data})
+from django.contrib.auth import logout
+def register(request,year=None,month=None):
+    if year is None:
+        year = datetime.now().year
+    if month is None:
+        month = datetime.now().strftime('%B')
+
+    data = create_calendar(year, month)
+    user = request.user
+    if user.is_authenticated:
+        logout(request)
+        return redirect('register')
+    else:
+        if request.method == 'POST':
+            form = RegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('login')  # Kullanıcı başarıyla kaydedildikten sonra giriş sayfasına yönlendirilebilirsiniz
+        else:
+            form = RegistrationForm()
+        return render(request, 'register.html', {'form': form, **data})
